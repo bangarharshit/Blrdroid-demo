@@ -1,0 +1,48 @@
+plugins {
+  id "net.ltgt.errorprone" version "0.0.16"
+  id 'com.github.sherter.google-java-format' version '0.7.1'
+}
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 26
+    buildToolsVersion "28.0.0"
+    defaultConfig {
+        applicationId "com.bangarharshit.blrdroid"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+tasks.withType(JavaCompile) {
+////  options.compilerArgs += [ '-Xep:CheckReturnValue:WARN']
+//  options.compilerArgs += ['-XepPatchChecks:MissingOverride,DefaultCharset,DeadException,ClassNewInstance',
+//                           '-XepPatchLocation:/Users/harshitbangar/presentation/Blrdroid/app/src/main/java/com/bangarharshit/blrdroid']
+    options.compilerArgs += ["-Xep:NullAway:ERROR",'-XepOpt:NullAway:AnnotatedPackages=com.bangarharshit.blrdroid']
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "io.reactivex.rxjava2:rxjava:2.2.1"
+    errorprone 'com.google.errorprone:error_prone_core:2.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.2'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+  annotationProcessor "com.uber.nullaway:nullaway:0.5.4"
+
+  // Optional, some source of nullability annotations.
+  // Not required on Android if you use the support
+  // library nullability annotations.
+  provided "com.google.code.findbugs:jsr305:3.0.2"
+}
