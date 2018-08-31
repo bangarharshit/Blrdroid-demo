@@ -6,7 +6,6 @@ public class GojfDemo {
       String x = "a";
       int y = 2;
       String z = "c";
-      int y = 2;
       long d = 1;
   }
 }
