@@ -1,0 +1,28 @@
+--- ErrorProneDemo.java
++++ ErrorProneDemo.java
+@@ -3,4 +3,5 @@
+ import io.reactivex.Observable;
+ import io.reactivex.functions.Consumer;
++import java.lang.reflect.InvocationTargetException;
+ import java.util.HashSet;
+ import java.util.Set;
+@@ -9,10 +10,6 @@
+ 
+    //@SuppressWarnings("CheckReturnValue")
+-  public static void main(String[] args) throws IllegalAccessException, InstantiationException {
+-     Observable.just(1).subscribe(new Consumer<Integer>() {
+-      @Override public void accept(Integer integer) {
+-        System.out.println(integer);
+-      }
+-     });
++  public static void main(String[] args) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
++     
+     //
+     // Set<Short> s = new HashSet<>();
+@@ -23,5 +20,5 @@
+     // System.out.println(s.size());
+ 
+-     ErrorProneDemo errorProneDemo = ErrorProneDemo.class.newInstance();
++     ErrorProneDemo errorProneDemo = ErrorProneDemo.class.getDeclaredConstructor().newInstance();
+   }
+ 

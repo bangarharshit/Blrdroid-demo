@@ -21,9 +21,9 @@ android {
     }
 }
 tasks.withType(JavaCompile) {
-////  options.compilerArgs += [ '-Xep:CheckReturnValue:WARN']
-//  options.compilerArgs += ['-XepPatchChecks:MissingOverride,DefaultCharset,DeadException,ClassNewInstance',
-//                           '-XepPatchLocation:/Users/harshitbangar/presentation/Blrdroid/app/src/main/java/com/bangarharshit/blrdroid']
+  options.compilerArgs += [ '-Xep:CheckReturnValue:WARN']
+  options.compilerArgs += ['-XepPatchChecks:MissingOverride,DefaultCharset,DeadException,ClassNewInstance',
+                           '-XepPatchLocation:/Users/harshitbangar/presentation/Blrdroid/app/src/main/java/com/bangarharshit/blrdroid']
     options.compilerArgs += ["-Xep:NullAway:ERROR",'-XepOpt:NullAway:AnnotatedPackages=com.bangarharshit.blrdroid']
 }
 
